@@ -27,6 +27,7 @@ return {
 	lazy = true,
 	name = "catppuccin",
 	opts = {
+		transparent = true,
 		integrations = {
 			aerial = true,
 			alpha = true,
