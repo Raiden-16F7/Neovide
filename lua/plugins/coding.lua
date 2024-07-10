@@ -1,3 +1,6 @@
+require("luasnip").filetype_extend("javascript", { "javascriptreact" })
+require("luasnip").filetype_extend("javascript", { "html" })
+require("luasnip/loaders/from_vscode").lazy_load()
 return {
 	-- Create annotations with one keybind, and jump your cursor in the inserted annotation
 	{
@@ -92,6 +95,30 @@ return {
 		dependencies = { "hrsh7th/cmp-emoji" },
 		opts = function(_, opts)
 			table.insert(opts.sources, { name = "emoji" })
+
+			-- Add the ':' cmdline setup configuration
+			require("cmp").setup.cmdline(":", {
+				mapping = require("cmp").mapping.preset.cmdline(),
+				sources = require("cmp").config.sources({
+					{ name = "path" },
+					{ name = "cmdline_history" },
+				}, {
+					{
+						name = "cmdline",
+						option = {
+							ignore_cmds = { "Man", "!" },
+						},
+					},
+				}),
+			})
+
+			-- Add the '/' cmdline setup configuration
+			require("cmp").setup.cmdline("/", {
+				mapping = require("cmp").mapping.preset.cmdline(),
+				sources = {
+					{ name = "buffer" },
+				},
+			})
 		end,
 	},
 }

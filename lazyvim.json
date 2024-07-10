@@ -1,5 +1,7 @@
 {
   "extras": [
+    "lazyvim.plugins.extras.coding.luasnip",
+    "lazyvim.plugins.extras.coding.neogen",
     "lazyvim.plugins.extras.coding.tabnine",
     "lazyvim.plugins.extras.util.project",
     "lazyvim.plugins.extras.vscode"
