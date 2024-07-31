@@ -10,6 +10,7 @@ vim.opt.autoindent = true
 vim.opt.smartindent = true
 vim.opt.hlsearch = true
 vim.opt.backup = false
+vim.opt.writebackup = false
 vim.opt.showcmd = true
 vim.opt.cmdheight = 1
 vim.opt.laststatus = 3
@@ -30,7 +31,7 @@ vim.opt.wildignore:append({ "*/node_modules/*" })
 vim.opt.splitbelow = true -- Put new windows below current
 vim.opt.splitright = true -- Put new windows right of current
 vim.opt.splitkeep = "cursor"
-vim.opt.mouse = ""
+vim.opt.mouse = "a"
 
 -- Undercurl
 vim.cmd([[let &t_Cs = "\e[4:3m"]])

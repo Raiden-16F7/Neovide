@@ -51,20 +51,41 @@ return {
 	{
 		"folke/which-key.nvim",
 		opts = {
+			preset = "helix",
 			plugins = {
 				marks = false,
 			},
-			ignore_missing = true,
-			window = {
-				border = "single", -- none, single, double, shadow
-				position = "bottom", -- bottom, top
-				margin = { 1, 0.05, 1, 0.05 }, -- extra window margin [top, right, bottom, left]. When between 0 and 1, will be treated as a percentage of the screen size.
-				padding = { 1, 2, 1, 2 }, -- extra window padding [top, right, bottom, left]
-				winblend = 30, -- value between 0-100 0 for fully opaque and 100 for fully transparent
-				zindex = 1000, -- positive value to position WhichKey above other floating windows.
-			},
 		},
 	},
+	-- {
+	-- 	"tris203/precognition.nvim",
+	-- 	--event = "VeryLazy",
+	-- 	opts = {
+	-- 		-- startVisible = true,
+	-- 		-- showBlankVirtLine = true,
+	-- 		-- highlightColor = { link = "Comment" },
+	-- 		hints = {
+	-- 			Caret = { text = "^", prio = 2 },
+	-- 			Dollar = { text = "$", prio = 1 },
+	-- 			MatchingPair = { text = "%", prio = 5 },
+	-- 			w = { text = "w", prio = 10 },
+	-- 			b = { text = "b", prio = 9 },
+	-- 			e = { text = "e", prio = 8 },
+	-- 			W = { text = "W", prio = 7 },
+	-- 			B = { text = "B", prio = 6 },
+	-- 			E = { text = "E", prio = 5 },
+	-- 		},
+	-- 		gutterHints = {
+	-- 			G = { text = "G", prio = 10 },
+	-- 			gg = { text = "gg", prio = 9 },
+	-- 			PrevParagraph = { text = "{", prio = 8 },
+	-- 			NextParagraph = { text = "}", prio = 8 },
+	-- 		},
+	-- 		disabled_fts = {
+	-- 			"dashboard",
+	-- 		},
+	-- 	},
+	-- },
 	-- {
 	-- 	"telescope.nvim",
 	-- 	dependencies = {

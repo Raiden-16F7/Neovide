@@ -90,18 +90,28 @@ return {
 		},
 	},
 
+	{ "akinsho/toggleterm.nvim", version = "*", config = true },
 	{
 		"nvim-cmp",
-		dependencies = { "hrsh7th/cmp-emoji" },
+		dependencies = { "hrsh7th/cmp-emoji", "hrsh7th/cmp-cmdline", "dmitmel/cmp-cmdline-history" },
 		opts = function(_, opts)
+			-- Define cmp_window configuration
+			local cmp = require("cmp")
+			opts.window = {
+				completion = cmp.config.window.bordered({
+					border = "rounded",
+				}),
+				documentation = cmp.config.window.bordered(),
+			}
+
 			table.insert(opts.sources, { name = "emoji" })
 
 			-- Add the ':' cmdline setup configuration
-			require("cmp").setup.cmdline(":", {
-				mapping = require("cmp").mapping.preset.cmdline(),
-				sources = require("cmp").config.sources({
+			cmp.setup.cmdline(":", {
+				mapping = cmp.mapping.preset.cmdline(),
+				sources = cmp.config.sources({
 					{ name = "path" },
-					{ name = "cmdline_history" },
+					{ name = "cmdline-history" },
 				}, {
 					{
 						name = "cmdline",
@@ -113,8 +123,8 @@ return {
 			})
 
 			-- Add the '/' cmdline setup configuration
-			require("cmp").setup.cmdline("/", {
-				mapping = require("cmp").mapping.preset.cmdline(),
+			cmp.setup.cmdline("/", {
+				mapping = cmp.mapping.preset.cmdline(),
 				sources = {
 					{ name = "buffer" },
 				},

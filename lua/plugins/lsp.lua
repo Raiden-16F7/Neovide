@@ -32,6 +32,7 @@ return {
 			}
 		end,
 		opts = {
+
 			inlay_hints = { enabled = false },
 			---@type lspconfig.options
 			servers = {
@@ -111,6 +112,9 @@ return {
 								castNumberToInteger = true,
 							},
 							diagnostics = {
+								float = {
+									borders = "rounded",
+								},
 								disable = { "incomplete-signature-doc", "trailing-space" },
 								-- enable = false,
 								groupSeverity = {

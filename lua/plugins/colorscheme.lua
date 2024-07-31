@@ -22,6 +22,7 @@
 -- 		},
 -- 	},
 -- }
+
 return {
 	"catppuccin/nvim",
 	lazy = true,
@@ -29,6 +30,14 @@ return {
 	opts = {
 		flavour = "mocha",
 		transparent_background = true,
+		color_overrides = {
+			all = {
+				green = "#a4fcc9",
+				base = "#030b16",
+				mantle = "#030b16",
+				crust = "#030b16",
+			},
+		},
 		integrations = {
 			aerial = true,
 			alpha = true,
