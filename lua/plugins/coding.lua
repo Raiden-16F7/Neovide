@@ -2,6 +2,15 @@ require("luasnip").filetype_extend("javascript", { "javascriptreact" })
 require("luasnip").filetype_extend("javascript", { "html" })
 require("luasnip/loaders/from_vscode").lazy_load()
 return {
+	--SuperMaven
+	{
+		"supermaven-inc/supermaven-nvim",
+		config = function()
+			require("supermaven-nvim").setup({
+				log_level = "off", -- set to "off" to disable logging completely
+			})
+		end,
+	},
 	-- Create annotations with one keybind, and jump your cursor in the inserted annotation
 	{
 		"danymat/neogen",
@@ -103,6 +112,9 @@ return {
 				}),
 				documentation = cmp.config.window.bordered(),
 			}
+			cmp.setup({
+				sources = { name = "supermaven" },
+			})
 
 			table.insert(opts.sources, { name = "emoji" })
 

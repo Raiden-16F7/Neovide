@@ -82,6 +82,7 @@ require("lazy").setup({
 				dd(plugin)
 			end,
 		},
+		border = "rounded",
 	},
 	debug = false,
 })
