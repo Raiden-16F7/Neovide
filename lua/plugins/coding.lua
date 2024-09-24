@@ -8,8 +8,19 @@ return {
 		config = function()
 			require("supermaven-nvim").setup({
 				log_level = "off", -- set to "off" to disable logging completely
+				keymaps = {
+					accept_suggestion = "<Tab>",
+					clear_suggestion = "<C-]>",
+					accept_word = "<C-j>",
+				},
 			})
 		end,
+	},
+	{
+		"L3MON4D3/LuaSnip",
+		keys = {
+			{ "<tab>", false, mode = { "i", "s" } },
+		},
 	},
 	-- Create annotations with one keybind, and jump your cursor in the inserted annotation
 	{
@@ -100,20 +111,69 @@ return {
 	},
 
 	{ "akinsho/toggleterm.nvim", version = "*", config = true },
+
 	{
 		"nvim-cmp",
-		dependencies = { "hrsh7th/cmp-emoji", "hrsh7th/cmp-cmdline", "dmitmel/cmp-cmdline-history" },
+		dependencies = {
+			"supermaven-inc/supermaven-nvim",
+			"hrsh7th/cmp-emoji",
+			"hrsh7th/cmp-cmdline",
+			"dmitmel/cmp-cmdline-history",
+		},
+		---@param opts cmp.ConfigSchema
 		opts = function(_, opts)
-			-- Define cmp_window configuration
+			local has_words_before = function()
+				unpack = unpack or table.unpack
+				local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+				return col ~= 0
+					and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+			end
+
 			local cmp = require("cmp")
+			local luasnip = require("luasnip")
+
+			-- Define cmp_window configuration
 			opts.window = {
 				completion = cmp.config.window.bordered({
 					border = "rounded",
 				}),
 				documentation = cmp.config.window.bordered(),
 			}
+
+			-- Mapping for Up and Down arrows, and Enter for snippet selection
+			opts.mapping = vim.tbl_extend("force", opts.mapping, {
+				["<Down>"] = cmp.mapping(function(fallback)
+					if cmp.visible() then
+						cmp.select_next_item()
+					elseif luasnip.jumpable(1) then
+						luasnip.jump(1)
+					elseif has_words_before() then
+						cmp.complete()
+					else
+						fallback()
+					end
+				end, { "i", "s" }),
+				["<Up>"] = cmp.mapping(function(fallback)
+					if cmp.visible() then
+						cmp.select_prev_item()
+					elseif luasnip.jumpable(-1) then
+						luasnip.jump(-1)
+					else
+						fallback()
+					end
+				end, { "i", "s" }),
+				["<CR>"] = cmp.mapping(function(fallback)
+					if luasnip.expand_or_jumpable() then
+						luasnip.expand_or_jump()
+					else
+						fallback()
+					end
+				end, { "i", "s" }), -- <Enter> for Luasnip selection
+			})
+
+			-- Add sources
 			cmp.setup({
-				sources = { name = "supermaven" },
+				sources = { { name = "supermaven" } },
 			})
 
 			table.insert(opts.sources, { name = "emoji" })
