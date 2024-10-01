@@ -162,13 +162,13 @@ return {
 						fallback()
 					end
 				end, { "i", "s" }),
-				["<CR>"] = cmp.mapping(function(fallback)
-					if luasnip.expand_or_jumpable() then
-						luasnip.expand_or_jump()
-					else
-						fallback()
-					end
-				end, { "i", "s" }), -- <Enter> for Luasnip selection
+				-- ["<CR>"] = cmp.mapping(function(fallback)
+				-- 	if luasnip.expand_or_jumpable() then
+				-- 		luasnip.expand_or_jump()
+				-- 	else
+				-- 		fallback()
+				-- 	end
+				-- end, { "i", "s" }), -- <Enter> for Luasnip selection
 			})
 
 			-- Add sources
